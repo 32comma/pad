@@ -10,7 +10,8 @@
         * {
             margin: 0;
             padding: 0;
-
+            font-family: 'Square Peg', cursive;
+            font-size: larger;
         }
 
         html,
@@ -59,6 +60,9 @@
     <!--tone.js cdn : https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.38/Tone.js-->
     <script src="main.js">
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Square+Peg&display=swap" rel="stylesheet">
 </head>
 
 <body id="body">
@@ -73,7 +77,6 @@
 
     </script>
     <script>
-        
         const fmSynth = new Tone.FMSynth().toDestination();
         //define
         var keySequence = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i',
@@ -112,7 +115,7 @@
         var list = document.getElementsByClassName('col');
         for (var i = 0; i < list.length; i++) {
             list[i].addEventListener('click', function (e) {
-             
+
                 var key = e.target.innerHTML;
                 fmSynth.triggerAttackRelease(key, "32n");
             });
