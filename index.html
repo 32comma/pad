@@ -31,7 +31,6 @@
         .col {
             border: 1px solid white;
             text-align: center;
-            line-height: 50px;
         }
 
         .table {
@@ -43,13 +42,12 @@
         .row {
             display: table-row;
             width: 100%;
-            height: auto;
+            height: calc(100%/5);
         }
 
         .col {
             display: table-cell;
-            width: auto;
-            height: auto;
+            width: calc(100%/7);
         }
 
         .col:hover {
@@ -70,7 +68,7 @@
 
     </script>
     <script>
-        const fmSynth = new Tone.FMSynth().toDestination();
+        const fmSynth = new Tone.PolySynth().toDestination();
         //define
         var keySequence = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i',
             'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm',
@@ -88,7 +86,7 @@
             for (var j = 0; j < pSequence.length; j++) {
                 var note = pSequence[j] + "" + oSequence[i];
                 map.set(keySequence[cnt], note);
-                html += `<div class="col note">${note}</div>`;
+                html += `<div id="${note}" class="col note">${note}</div>`;
                 cnt++;
                 if (keySequence.length == cnt) {
                     break;
@@ -101,15 +99,35 @@
         html += `</div>`;
         body.innerHTML = html;
         document.body.addEventListener("keypress", function (e) {
-            fmSynth.triggerAttackRelease(map.get(e.key), '8n');
+            fmSynth.triggerAttackRelease(map.get(e.key), '32n');
+            var note = document.getElementById(map.get(e.key));
+            var key = e.target.innerHTML;
+            note.style.backgroundColor = 'white';
+            note.style.color = 'black';
+        });
+        document.body.addEventListener("keyup", function (e) {
+            var note = document.getElementById(map.get(e.key));
+            note.style.backgroundColor = 'black';
+            note.style.color = 'white';
         });
         //mouseEvent
         var list = document.getElementsByClassName('col');
         for (var i = 0; i < list.length; i++) {
-            list[i].addEventListener('click', function (e) {
+            list[i].addEventListener('touchstart', function (e) {
                 var key = e.target.innerHTML;
+                var note = e.target;
+                note.style.backgroundColor = 'white';
+                note.style.color = 'black';
                 console.log(key);
-                fmSynth.triggerAttackRelease(key, '8n');
+                fmSynth.triggerAttackRelease(key, '32n');
+            });
+            list[i].addEventListener('touchend', function (e) {
+
+                var key = e.target.innerHTML;
+                var note = e.target;
+                note.style.backgroundColor = 'black';
+                note.style.color = 'white';
+                console.log(key);
             });
         }
     </script>
