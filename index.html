@@ -101,7 +101,6 @@
         document.body.addEventListener("keypress", function (e) {
             fmSynth.triggerAttackRelease(map.get(e.key), '32n');
             var note = document.getElementById(map.get(e.key));
-            var key = e.target.innerHTML;
             note.style.backgroundColor = 'white';
             note.style.color = 'black';
         });
