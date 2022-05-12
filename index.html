@@ -58,7 +58,7 @@
         }
     </style>
     <!--tone.js cdn : https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.38/Tone.js-->
-    <script src="main.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.38/Tone.js">
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -88,7 +88,7 @@
             for (var j = 0; j < pSequence.length; j++) {
                 var note = pSequence[j] + "" + oSequence[i];
                 map.set(keySequence[cnt], note);
-                html += `<div class="col note"></div>`;
+                html += `<div class="col note">${note}</div>`;
                 cnt++;
                 if (keySequence.length == cnt) {
                     break;
@@ -101,14 +101,15 @@
         html += `</div>`;
         body.innerHTML = html;
         document.body.addEventListener("keypress", function (e) {
-            fmSynth.triggerAttackRelease(map.get(e.key), "32n");
+            fmSynth.triggerAttackRelease(map.get(e.key), '8n');
         });
         //mouseEvent
         var list = document.getElementsByClassName('col');
         for (var i = 0; i < list.length; i++) {
             list[i].addEventListener('click', function (e) {
                 var key = e.target.innerHTML;
-                fmSynth.triggerAttackRelease(key, "32n");
+                console.log(key);
+                fmSynth.triggerAttackRelease(key, '8n');
             });
         }
     </script>
